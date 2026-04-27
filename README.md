@@ -21,7 +21,7 @@ Funcionalidades complexas (como carrinho de compras e pagamentos) foram mapeadas
 
 2. Execute o servidor backend:
    ```bash
-    python app.py
+    python controler.py
     ```
 3. Acesse no seu navegador o endereço
 
