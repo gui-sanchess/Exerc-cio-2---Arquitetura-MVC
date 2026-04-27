@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>MVP - Livraria</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f9; }
+        .container { max-width: 650px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        select, button { margin-bottom: 15px; padding: 10px; width: 100%; box-sizing: border-box; border-radius: 4px; border: 1px solid #ccc; }
+        button { background-color: #0056b3; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #004494; }
+        .livro-card { border-bottom: 1px solid #ddd; padding: 15px 0; }
+        .detalhes { color: #555; font-size: 14px; margin-top: 5px; }
+        .estoque { color: green; font-weight: bold; }
+        .preco { color: #d9534f; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📚 Buscar Livros (MVP)</h2>
+
+    <form method="GET" action="/">
+
+        <label>Título do Livro:</label>
+        <select name="titulo">
+            <option value="">Todos os Títulos</option>
+            {% for titulo in titulos %}
+                <option value="{{ titulo }}">{{ titulo }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Autor:</label>
+        <select name="autor">
+            <option value="">Todos os Autores</option>
+            {% for autor in autores %}
+                <option value="{{ autor }}">{{ autor }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Categoria:</label>
+        <select name="categoria">
+            <option value="">Todas as Categorias</option>
+            {% for categoria in categorias %}
+                <option value="{{ categoria }}">{{ categoria }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Ano de Publicação:</label>
+        <select name="ano">
+            <option value="">Todos os Anos</option>
+            {% for ano in anos %}
+                <option value="{{ ano }}">{{ ano }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Aplicar Filtros</button>
+        <a href="/" style="display:block; text-align:center; text-decoration:none; color:gray; font-size: 14px;">Limpar Busca</a>
+    </form>
+
+    <hr>
+
+    <h3>Resultados ({{ livros|length }} encontrados):</h3>
+    <div>
+        {% for livro in livros %}
+            <div class="livro-card">
+                <strong>{{ livro.titulo }}</strong> ({{ livro.ano }})<br>
+                <div class="detalhes">
+                    Autor: {{ livro.autor }} | Categoria: {{ livro.catalogo }}<br>
+                    <span class="estoque">✓ Em Estoque</span> | <span class="preco">Preço: R$ 49,90</span><br>
+                    <small><em>Sinopse: Um clássico imperdível da literatura, aclamado por gerações de leitores.</em></small>
+                </div>
+            </div>
+        {% else %}
+            <p>Nenhum livro encontrado com esses filtros. Tente novamente.</p>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>
